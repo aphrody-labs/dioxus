@@ -1131,3 +1131,17 @@ doc-scrape-examples = true
 [[example]]
 name = "__scrape_example_list"
 path = "examples/scripts/scrape_examples.rs"
+
+# --- Rose Griffon optimisations (kept on top of upstream by .github/workflows/rg-sync.yml) ---
+# Distribution profiles; the default release profile stays incremental for fast iteration.
+[profile.rg-release]
+inherits = "release"
+lto = "fat"
+codegen-units = 1
+incremental = false
+strip = true
+
+[profile.rg-wasm]
+inherits = "rg-release"
+opt-level = "z"
+panic = "abort"
